@@ -1,17 +1,44 @@
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ title }}</title>
-</head>
-<body>
-    <h1>{{ title }}</h1>
-    <ul>
-        <li><a href="{% url 'view1' %}">Перейти на Сторінку 1</a></li>
-        <li><a href="{% url 'view2' %}">Перейти на Сторінку 2</a></li>
-        <li><a href="{% url 'view3' %}">Перейти на Сторінку 3</a></li>
-        <li><a href="{% url 'view4' %}">Перейти на Сторінку 4</a></li>
-        <li><a href="{% url 'view5' %}">Перейти на Сторінку 5</a></li>
-    </ul>
-</body>
-</html>
+{% extends 'cosmetics/base.html' %}
+
+{% block title %}Головна - {{ page_title }}{% endblock %}
+
+{% block content %}
+    <div class="jumbotron text-center bg-light p-5 rounded shadow-sm">
+        <h1 class="display-4">{{ welcome_message }}</h1>
+        <p class="lead">Відкрийте для себе світ якісної косметики та доглядових засобів.</p>
+        <hr class="my-4">
+        <p>У нас ви знайдете широкий вибір товарів від {{ num_categories }} категорій. Всього товарів: {{ num_products }}.</p>
+        <p>Наш хіт продажу: **{{ featured_product }}**</p>
+        <a class="btn btn-primary btn-lg" href="#" role="button">Переглянути товари</a>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Про нас</h5>
+                    <p class="card-text">Ми прагнемо надати найкращий вибір косметики та чудовий досвід покупок для наших клієнтів.</p>
+                    <a href="#" class="btn btn-outline-secondary">Детальніше</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Новинки</h5>
+                    <p class="card-text">Завжди оновлюємо нашу колекцію свіжими та популярними продуктами.</p>
+                    <a href="#" class="btn btn-outline-secondary">Переглянути новинки</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Зв'яжіться з нами</h5>
+                    <p class="card-text">Маєте питання чи пропозиції? Ми завжди раді допомогти.</p>
+                    <a href="#" class="btn btn-outline-secondary">Написати нам</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

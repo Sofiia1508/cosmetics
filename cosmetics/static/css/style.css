@@ -1,0 +1,37 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa; /* Світло-сірий фон */
+}
+
+.jumbotron {
+    background-color: #e9ecef; /* Трохи темніший фон для "jumbotron" */
+    padding: 3rem;
+    margin-bottom: 2rem;
+    border-radius: .3rem;
+}
+
+.card {
+    border: none; /* Прибираємо межу картки */
+    transition: transform 0.2s ease-in-out; /* Анімація при наведенні */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Картка трохи піднімається при наведенні */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important; /* Додаємо тінь */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Стандартний синій Bootstrap */
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Темніший синій при наведенні */
+    border-color: #0056b3;
+}
+
+footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}

@@ -1,8 +1,20 @@
 from django.shortcuts import render
+from django.http import HttpResponse # Додайте, якщо використовуєте HttpResponse
+
 def index(request):
-    context = {'title': 'Головна сторінка'}
+    """
+    Представлення для відображення головної сторінки.
+    """
+    context = {
+        'page_title': 'Головна Сторінка',
+        'welcome_message': 'Ласкаво просимо до нашого магазину косметики!',
+        'featured_product': 'Новий крем для обличчя з гіалуроновою кислотою!',
+        'num_products': 125,
+        'num_categories': 15,
+    }
     return render(request, 'cosmetics/index.html', context)
 
+# Функції для ваших 5 view-ів
 def view1(request):
     context = {'title': 'Сторінка 1'}
     return render(request, 'cosmetics/view1.html', context)
