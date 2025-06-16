@@ -1,7 +1,7 @@
 # DjangoProject1/urls.py
 
 from django.contrib import admin
-from django.urls import path, include # <--- ОБОВ'ЯЗКОВО! МАЄ БУТИ 'include'
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),

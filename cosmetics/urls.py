@@ -1,7 +1,7 @@
 # cosmetics/urls.py
 
 from django.urls import path
-from . import views # <--- ВАЖЛИВО: Імпортуємо views з поточної директорії
+from . import views # <--- ВAЖЛИВО: Імпортуємо views з поточної директорії
 
 urlpatterns = [
     # Головна сторінка нашого додатку

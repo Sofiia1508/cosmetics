@@ -4,7 +4,7 @@ body {
 }
 
 .jumbotron {
-    background-color: #e9ecef; /* Трохи темніший фон для "jumbotron" */
+    background-color: #e9ecef;
     padding: 3rem;
     margin-bottom: 2rem;
     border-radius: .3rem;
