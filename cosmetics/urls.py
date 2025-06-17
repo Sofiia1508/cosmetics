@@ -1,16 +1,17 @@
 # cosmetics/urls.py
 
 from django.urls import path
-from . import views # <--- ВAЖЛИВО: Імпортуємо views з поточної директорії
+from . import views
+
+# ОБОВ'ЯЗКОВО: Це визначає простір імен для URL-маршрутів цієї програми.
+# Це дозволить використовувати {% url 'cosmetics:home' %} тощо.
+app_name = 'cosmetics'
 
 urlpatterns = [
-    # Головна сторінка нашого додатку
-    path('', views.index, name='index'),
-
-    # Шляхи до ваших 5 додаткових сторінок
-    path('view1/', views.view1, name='view1'),
-    path('view2/', views.view2, name='view2'),
-    path('view3/', views.view3, name='view3'),
-    path('view4/', views.view4, name='view4'),
-    path('view5/', views.view5, name='view5'),
+    path('', views.home_view, name='home'),
+    path('view1/', views.page1_view, name='page1'),
+    path('view2/', views.page2_view, name='page2'),
+    path('view3/', views.page3_view, name='page3'),
+    path('view4/', views.page4_view, name='page4'),
+    path('view5/', views.page5_view, name='page5'),
 ]

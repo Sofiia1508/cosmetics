@@ -1,11 +1,9 @@
-{% extends 'cosmetics/base.html' %} {# <--- ОБОВ'ЯЗКОВО! Наслідуємо базовий шаблон #}
-
-{% block title %}{{ Пронас}} - Мій Магазин Косметики{% endblock %}
-
+{% extends 'cosmetics/base.html' %}
+{% block title %}{{ title }}{% endblock %}
 {% block content %}
-    <div class="container mt-4">
-        <h1>Ласкаво просимо на {{ title }}!</h1>
-        <p>Це приклад сторінки {{ title }}. Ви можете додати сюди будь-який вміст.</p>
-        <a href="{% url 'index' %}" class="btn btn-secondary mt-3">Повернутися на головну</a> {# <--- ЗМІНЕНО: Посилання на index #}
+    <h2 class="text-center my-4">{{ title }}</h2>
+    <p class="text-center">{{ content }}</p>
+    <div class="text-center mt-4">
+        <a href="{% url 'cosmetics:home' %}" class="btn btn-secondary">Повернутись на головну</a>
     </div>
 {% endblock %}
