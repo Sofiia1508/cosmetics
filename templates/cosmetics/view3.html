@@ -1,9 +1,15 @@
 {% extends 'cosmetics/base.html' %}
+{% load static %} {# Додайте цей рядок #}
+
 {% block title %}{{ title }}{% endblock %}
+
 {% block content %}
-    <h2 class="text-center my-4">{{ title }}</h2>
-    <p class="text-center">{{ content }}</p>
-    <div class="text-center mt-4">
-        <a href="{% url 'cosmetics:home' %}" class="btn btn-secondary">Повернутись на головну</a>
+    <div class="my-4">
+        <h2 class="text-center">{{ title }}</h2>
+        <p class="text-center">{{ content }}</p>
+        <div class="text-center">
+            {# Виправлено ім'я URL з 'home' на 'cosmetics:home' #}
+            <a href="{% url 'cosmetics:home' %}" class="btn btn-secondary">Повернутися на головну</a>
+        </div>
     </div>
 {% endblock %}

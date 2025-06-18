@@ -1,24 +1,52 @@
-{% extends 'cosmetics/base.html' %}
-{% load static %}
+{# DjangoProject1/cosmetics/templates/cosmetics/index.html #}
+{% extends 'cosmetics/base.html' %} {# Розширюємо базовий шаблон #}
+{% load static %} {# Завантажуємо теги для статичних файлів #}
 
-{% block title %}{{ title }}{% endblock %}
+{% block title %}
+    {{ title }} {# Заголовок сторінки з контексту view #}
+{% endblock %}
 
 {% block content %}
-    <div class="text-center my-5">
-        <h2 class="display-4">{{ welcome_message }}</h2>
+    <div class="jumbotron text-center bg-light p-5 my-4">
+        <h1 class="display-4">{{ welcome_message }}</h1>
         <p class="lead">Відкрийте для себе найкращі продукти для догляду та краси.</p>
+        <hr class="my-4">
+        <p>Наш асортимент включає тільки високоякісні та ефективні засоби.</p>
+        {# Замість статичного посилання, посилання на категорію "Декор для дому" (або іншу існуючу) #}
+        {# Переконайтеся, що категорія з таким slug існує у вашій базі даних #}
+        <a class="btn btn-primary btn-lg" href="{% url 'cosmetics:product_list_by_category' category_slug='dekor-dlya-domu' %}" role="button">Переглянути продукти</a>
     </div>
 
-    <div class="my-5">
-        <h3 class="text-center mb-4">{{ featured_products_title }}</h3>
-        <div class="product-grid">
-            {% for product in products %}
-                <div class="product-item">
-                    <h3 class="text-primary">{{ product.name }}</h3>
-                    <p>{{ product.description }}</p>
-                    <a href="#" class="btn btn-outline-primary mt-2">Детальніше</a>
+    <h2 class="text-center my-4">Наші популярні товари:</h2>
+    <div class="row">
+        {# Перебираємо продукти, передані з home_view #}
+        {% for product in products %}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    {% if product.image %}
+                        <a href="{{ product.get_absolute_url }}">
+                            <img class="card-img-top" src="{{ product.image.url }}" alt="{{ product.name }}" style="max-height: 200px; object-fit: cover;">
+                        </a>
+                    {% else %}
+                        <a href="{{ product.get_absolute_url }}">
+                            <img class="card-img-top" src="{% static 'images/no_image.png' %}" alt="No image" style="max-height: 200px; object-fit: cover;">
+                        </a>
+                    {% endif %}
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+                        </h4>
+                        <h5>{{ product.price }} грн</h5>
+                        <p class="card-text">{{ product.description|truncatechars:100 }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ product.get_absolute_url }}" class="btn btn-primary">Детальніше</a>
+                    </div>
                 </div>
-            {% endfor %}
-        </div>
+            </div>
+        {% empty %}
+            <p class="text-center">Поки що немає доступних товарів.</p>
+        {% endfor %}
     </div>
+
 {% endblock %}

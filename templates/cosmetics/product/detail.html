@@ -1,0 +1,35 @@
+{# DjangoProject1/cosmetics/templates/cosmetics/product/detail.html #}
+
+{% extends 'cosmetics/base.html' %} {# Розширюємо базовий шаблон #}
+{% load static %} {# Завантажуємо теги для статичних файлів #}
+
+{% block title %}
+    {{ product.name }} {# Заголовок сторінки - назва продукту #}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-4">
+            {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid">
+            {% else %}
+                <img src="{% static 'images/no_image.png' %}" alt="No image" class="img-fluid">
+            {% endif %}
+        </div>
+        <div class="col-md-8">
+            <h2>{{ product.name }}</h2>
+            <p class="text-muted">{{ product.category.name }}</p>
+            <h3>{{ product.price }} грн</h3>
+            <button class="buy-button">Купити</button>
+            <p>{{ product.description|linebreaks }}</p> {# linebreaks для відображення переносів рядків #}
+            {% if product.available %}
+                <p class="text-success">В наявності</p>
+                {# Додайте кнопку "Додати в кошик" тут, якщо у вас є функціонал кошика #}
+            {% else %}
+                <p class="text-danger">Немає в наявності</p>
+            {% endif %}
+            <a href="{% url 'cosmetics:product_list_by_category' product.category.slug %}" class="btn btn-secondary mt-3">Повернутися до категорії</a>
+            <a href="{% url 'cosmetics:home' %}" class="btn btn-info mt-3">Повернутися до всіх продуктів</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{# DjangoProject1/cosmetics/templates/cosmetics/product/list.html #}
+
+{% extends 'cosmetics/base.html' %} {# Розширюємо базовий шаблон #}
+{% load static %} {# Завантажуємо теги для статичних файлів #}
+
+{% block title %}
+    {# Встановлюємо заголовок сторінки: назва категорії або "Продукти" #}
+    {% if category %}{{ category.name }}{% else %}Продукти{% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-3">
+            <h5 class="my-4">Категорії</h5>
+            <div class="list-group">
+                {# Посилання на "Всі Продукти" - використовуємо URL головної сторінки #}
+                <a href="{% url 'cosmetics:home' %}" class="list-group-item list-group-item-action {% if not category %}active{% endif %}">Всі Продукти</a>
+                {# Динамічні посилання на кожну категорію #}
+                {% for cat in categories %}
+                    <a href="{{ cat.get_absolute_url }}" class="list-group-item list-group-item-action {% if category.slug == cat.slug %}active{% endif %}">
+                        {{ cat.name }}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-md-9">
+            <h1 class="my-4">
+                {# Заголовок для списку продуктів: назва категорії або "Всі Продукти" #}
+                {% if category %}{{ category.name }}{% else %}Всі Продукти{% endif %}
+            </h1>
+            <div class="row">
+                {# Перебираємо всі продукти #}
+                {% for product in products %}
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card h-100">
+                            {% if product.image %}
+                                <a href="{{ product.get_absolute_url }}">
+                                    <img class="card-img-top" src="{{ product.image.url }}" alt="{{ product.name }}" style="max-height: 200px; object-fit: cover;">
+                                </a>
+                            {% else %}
+                                <a href="{{ product.get_absolute_url }}">
+                                    <img class="card-img-top" src="{% static 'images/no_image.png' %}" alt="No image" style="max-height: 200px; object-fit: cover;">
+                                </a>
+                            {% endif %}
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+                                </h4>
+                                <h5>{{ product.price }} грн</h5>
+                                <p class="card-text">{{ product.description|truncatechars:100 }}</p>
+                            </div>
+                            <div class="card-footer">
+                                <a href="{{ product.get_absolute_url }}" class="btn btn-primary">Детальніше</a>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    {# Повідомлення, якщо продуктів немає #}
+                    <p>На жаль, продуктів у цій категорії немає.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
